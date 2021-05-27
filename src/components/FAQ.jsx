@@ -5,7 +5,7 @@ export default function FAQ(props) {
   const { setTitle } = props;
   useEffect(() => {
     setTitle("FAQ");
-  }, []);
+  });
 
   const arrOfTitles = [
     "Allergen Info",
@@ -17,7 +17,7 @@ export default function FAQ(props) {
 
   return (
     <>
-      <div className='d-flex flex-column gap-3 faqWrapper'>
+      <div className="d-flex flex-column gap-3 faqWrapper">
         {arrOfTitles.map((title) => {
           return <Dropdown title={title} />;
         })}

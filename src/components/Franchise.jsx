@@ -42,18 +42,18 @@ export default function Franchise(props) {
         inputs[data] === undefined ||
         inputs[data] === ""
       ) {
-        const capitalized = capitalize(data)
+        const capitalized = capitalize(data);
         setMissing(capitalized);
         handleShow();
         return;
       }
     }
-    FAQ.push('/FAQ')
+    FAQ.push("/FAQ");
   };
 
   useEffect(() => {
     setTitle("Franchise");
-  }, []);
+  });
 
   const Modalstyle = {
     content: {

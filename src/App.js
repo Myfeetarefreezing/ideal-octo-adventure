@@ -1,5 +1,4 @@
 import "./App.css";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,10 +22,10 @@ function App() {
             <Redirect to="Franchise" />
           </Route>
           <Route path="/FAQ">
-            <FAQ title={title} setTitle={setTitle} />
+            <FAQ setTitle={setTitle} />
           </Route>
           <Route path="/Franchise">
-            <Franchise title={title} setTitle={setTitle} />
+            <Franchise setTitle={setTitle} />
           </Route>
         </Switch>
       </Router>
