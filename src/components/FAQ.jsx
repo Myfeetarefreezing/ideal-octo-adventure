@@ -5,7 +5,7 @@ import { Spinner } from "react-bootstrap";
 import Dropdown from "./Dropdown";
 import Animated from "react-mount-animation";
 
-const base = "http://localhost:5050/";
+const base = "";
 
 export default function FAQ(props) {
   const { setTitle } = props;
