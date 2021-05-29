@@ -1,14 +1,15 @@
 import ReactModal from "react-modal";
 import logo from "../imgs/sk8ter_b0i.png";
+import Animated from "react-mount-animation";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Franchise(props) {
   const { setTitle } = props;
-  const FAQ = useHistory();
-
+  const [isMounted, setIsMounted] = useState(false);
   const [missing, setMissing] = useState(null);
   const [show, setShow] = useState(false);
+  const mountAnimation = `0% {opacity: 0} 100% {opacity: 1}`;
   const [inputs, setInputs] = useState({
     name: null,
     city: null,
@@ -17,6 +18,7 @@ export default function Franchise(props) {
     note: null,
   });
 
+  const FAQ = useHistory();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -48,12 +50,14 @@ export default function Franchise(props) {
         return;
       }
     }
+    setIsMounted(false);
     FAQ.push("/FAQ");
   };
 
   useEffect(() => {
-    setTitle("Franchise");
-  });
+    setTitle("Form");
+    setIsMounted(true);
+  }, []);
 
   const Modalstyle = {
     content: {
@@ -65,11 +69,11 @@ export default function Franchise(props) {
   };
 
   return (
-    <>
+    <Animated.div show={isMounted} mountAnim={mountAnimation}>
       <div className="d-flex flex-column">
         <div className="donutsBox">
-          <h3>Join our DONUTS!</h3>
-          <p>
+          <h3 className="textStyle1">Join our DONUTS!</h3>
+          <p className="textStyle2">
             6 Donuts. different flavors for your choice6 Donuts. different 6
             Donuts. different flavors for your choice6 Donuts. different
           </p>
@@ -81,35 +85,35 @@ export default function Franchise(props) {
       >
         <input
           onChange={handleChange}
-          className="formInput"
+          className="formInput textStyle2"
           id="name"
           type="text"
           placeholder="Name"
         />
         <input
           onChange={handleChange}
-          className="formInput"
+          className="formInput textStyle2"
           id="city"
           type="text"
           placeholder="City"
         />
         <input
           onChange={handleChange}
-          className="formInput"
+          className="formInput textStyle2"
           id="phone"
           type="number"
           placeholder="number"
         />
         <input
           onChange={handleChange}
-          className="formInput"
+          className="formInput textStyle2"
           id="email"
           type="email"
           placeholder="Email"
         />
         <input
           onChange={handleChange}
-          className="formInput"
+          className="formInput textStyle2"
           id="note"
           type="text"
           placeholder="Add a note"
@@ -131,6 +135,6 @@ export default function Franchise(props) {
           <p>{missing} is missing!</p>
         </div>
       </ReactModal>
-    </>
+    </Animated.div>
   );
 }

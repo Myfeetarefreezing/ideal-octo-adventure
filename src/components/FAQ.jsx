@@ -1,27 +1,45 @@
+import axios from 'axios'
+import { useState } from "react";
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import Dropdown from "./Dropdown";
+import Animated from "react-mount-animation";
+
+const base = "http://localhost:5050/";
 
 export default function FAQ(props) {
   const { setTitle } = props;
-  useEffect(() => {
-    setTitle("FAQ");
-  });
+  const [faqList, setfaqList] = useState([]);
+  const [spinner, setSpinner] = useState(false);
+  const [isMounted, setisMounted] = useState(false)
+  const mountAnimation = `60% {transform: translate(0px, 0)} 85% {transform: translate(10px, 0)}`
 
-  const arrOfTitles = [
-    "Allergen Info",
-    "Wheres my donut",
-    "who is Samuel L. Jackson",
-    "who is speedy gonzales",
-    "How old am I",
-  ];
+  const initialLoad = async () => {
+    setisMounted(true)
+    setTitle("FAQ");
+    setSpinner(true);
+    const getList = await axios.get(base + 'list');
+    setfaqList(getList.data);
+    setSpinner(false);
+  };
+
+  useEffect(() => {
+    initialLoad();
+  }, []);
 
   return (
-    <>
-      <div className="d-flex flex-column gap-3 faqWrapper">
-        {arrOfTitles.map((title) => {
-          return <Dropdown title={title} />;
-        })}
+    <Animated.div show={isMounted} mountAnim={mountAnimation}>
+      <div className="d-flex flex-column gap-3 textStyle1 faqWrapper">
+        {spinner ? (
+          <div className="spinnerWrapper">
+            <Spinner animation="border" variant="dark" />
+          </div>
+        ) : (
+          faqList.map((faq) => {
+            return <Dropdown key={faq.question} faq={faq} />;
+          })
+        )}
       </div>
-    </>
+    </Animated.div>
   );
 }

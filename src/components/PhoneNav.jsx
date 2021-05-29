@@ -10,14 +10,15 @@ export default function PhoneNav(props) {
       console.log("Yay");
     }
   };
+
   return (
     <>
       <div className="navWrapper">
         <button
-          className="glyphicon glyphicon-menu-left backBtn"
+          className="glyphicon glyphicon-menu-left backBtn textStyle1"
           onClick={handleBack}
         />
-        <h2>{title}</h2>
+        <h2 className="textStyle1">{title}</h2>
       </div>
       <div className="divider"></div>
     </>
