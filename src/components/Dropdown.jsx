@@ -1,17 +1,23 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import Animated from "react-mount-animation";
 
 export default function Dropdown(props) {
-  const { faq } = props;
+  const { faq , delay} = props;
   const { answer, question } = faq;
   const [isOpen, setisOpen] = useState(false);
+  const [isMounted, setisMounted] = useState(false);
+  const mountAnimation = `0% {transform: translate(-100px, 0)} 100% {transform: translate(0px, 0)}`
 
   const handleOpen = (e) => {
     setisOpen(!isOpen);
   };
 
+  useEffect(() => {
+    setisMounted(true);
+  }, []);
+
   return (
-    <>
+    <Animated.div show={isMounted} mountAnim={mountAnimation} delay={delay}>
       <div className="dropDownWrapper">
         <div className="d-flex justify-content-between titleDiv">
           <div>{question}</div>
@@ -30,6 +36,6 @@ export default function Dropdown(props) {
           </div>
         </div>
       </div>
-    </>
+    </Animated.div>
   );
 }
