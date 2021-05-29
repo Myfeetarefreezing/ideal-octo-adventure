@@ -12,7 +12,7 @@ export default function FAQ(props) {
   const [faqList, setfaqList] = useState([]);
   const [spinner, setSpinner] = useState(false);
   const [isMounted, setisMounted] = useState(false);
-  const mountAnimation = `60% {transform: translate(0px, 0)} 85% {transform: translate(10px, 0)}`;
+  const mountAnimation = `60% {transform: translate(0px, 0)}  85% {transform: translate(10px, 0)}`;
   let delay = 0;
 
   const initialLoad = async () => {
